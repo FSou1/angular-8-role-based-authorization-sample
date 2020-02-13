@@ -1,0 +1,20 @@
+<ul>
+    <li><a [routerLink]="['/']">Home</a></li>
+
+    <li *appUser>
+        User:
+        <ul>
+            <li><a [routerLink]="['profile']">Profile</a></li>
+        </ul>
+    </li>
+
+    <li *appUserRole="[ Role.Admin ]">
+        Admin:
+        <ul>
+            <li><a [routerLink]="['admin', 'dashboard']">Dashboard</a></li>
+        </ul>
+    </li>
+
+    <li><a [routerLink]="['login']">Login</a></li>
+</ul>
+<router-outlet></router-outlet>
