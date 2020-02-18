@@ -1,20 +1,48 @@
-<ul>
-    <li><a [routerLink]="['/']">Home</a></li>
+<header class="navbar navbar-expand navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']">Home</a>
+      </li>
 
-    <li *appUser>
-        User:
-        <ul>
-            <li><a [routerLink]="['profile']">Profile</a></li>
-        </ul>
-    </li>
+      <!-- Authorized only -->
+      <li class="nav-item" *ngIf="isAuthorized">
+        <a class="nav-link" [routerLink]="['profile']">Profile</a>
+      </li>
 
-    <li *appUserRole="[ Role.Admin ]">
-        Admin:
-        <ul>
-            <li><a [routerLink]="['admin', 'dashboard']">Dashboard</a></li>
-        </ul>
-    </li>
+      <!-- Admin only -->
+      <li class="nav-item" *ngIf="isAdmin">
+        <a class="nav-link" [routerLink]="['admin', 'dashboard']">Dashboard</a>
+      </li>
 
-    <li><a [routerLink]="['login']">Login</a></li>
-</ul>
-<router-outlet></router-outlet>
+      <!-- Anonymous only -->
+      <li class="nav-item" *ngIf="!isAuthorized">
+        <a class="nav-link" [routerLink]="['login']">Login</a>
+      </li>
+
+      <!-- Authorized only -->
+      <li class="nav-item" *ngIf="isAuthorized">
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+
+    <span class="navbar-text">
+      <span class="badge badge-warning" *ngIf="isAuthorized">Authorized</span>
+      <span class="badge badge-danger" *ngIf="isAdmin">Admin</span>
+    </span>
+</header>
+
+<div class="jumbotron">
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div class="text-center">
+  <p>
+    <a href="https://fsou1.github.io" target="_blank">@maximzhukov_dev</a>, 2020
+  </p>
+
+  <p>
+    <a href="https://fsou1.github.io" target="_top">Blog post</a>
+  </p>
+</div>

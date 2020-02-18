@@ -12,7 +12,7 @@ export class UserRoleDirective implements OnInit {
 
     userRoles: Role[];
 
-    @Input()
+    @Input() 
     set appUserRole(roles: Role[]) {
         if (!roles || !roles.length) {
             throw new Error('Roles value is empty or missed');
